@@ -19,7 +19,6 @@ class TypeColumn extends React.Component {
 
     addNewNote() {
         this.props.Connection.send('Create', this.state.newNoteText);
-        this.setState({ newNoteText: ''});
     }
 
     changeNewNoteText(event) {
@@ -31,7 +30,7 @@ class TypeColumn extends React.Component {
 
         if(this.props.Notes != null && this.props.Notes.length > 0) {
             notes = this.props.Notes.map(function(item, i) {
-                return <span className='note-text' key={i}>{item}</span>
+                return <span className='note-text' key={i}>{item.text}</span>
             });
         }
 
