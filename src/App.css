@@ -7,6 +7,10 @@
   pointer-events: none;
 }
 
+body {
+  background: #e8e8e8;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -29,8 +33,11 @@
 }
 
 .type-column {
-  width: 33%;
+  width: 30%;
   float: left;
+  background: #ffffff;
+  margin: 30px 1.5%;
+  padding-bottom: 20px;
 }
 
 .note-text {
