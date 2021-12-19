@@ -41,11 +41,25 @@ body {
 }
 
 .note-text {
-  background: yellow;
   width: 60%;
   display: block;
   margin-left: 20%;
   margin-top: 20px;
+  text-align: left;
+  padding: 10px;
+}
+
+.note-text.green {
+  background: #7bfc03;
+}
+
+.note-text.red {
+  background: #fc5603;
+  color: #ffffff;
+}
+
+.note-text.yellow {
+  background: #f9ff80;
 }
 
 @keyframes App-logo-spin {

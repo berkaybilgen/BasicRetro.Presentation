@@ -18,7 +18,7 @@ class TypeColumn extends React.Component {
     }
 
     addNewNote() {
-        this.props.Connection.send('Create', this.state.newNoteText);
+        this.props.Connection.send('Create', this.props.BoardID, this.props.NoteTypeID, this.state.newNoteText);
     }
 
     changeNewNoteText(event) {
@@ -29,8 +29,9 @@ class TypeColumn extends React.Component {
         var notes = '';
 
         if(this.props.Notes != null && this.props.Notes.length > 0) {
+            const className = 'note-text ' + this.props.Color;
             notes = this.props.Notes.map(function(item, i) {
-                return <span className='note-text' key={i}>{item.text}</span>
+                return <span className={className} key={i}>{item.text}</span>
             });
         }
 
