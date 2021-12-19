@@ -9,6 +9,7 @@ function Board() {
   const [connection, setConnection] = useState(null);
   const [notes, setNotes] = useState([]);
   const [getNotes, setGetNotes] = useState(true);
+  const [showTexts, setShowTexts] = useState(false);
   const latestColumn = useRef(null);
   let { id } = useParams();
 
@@ -68,9 +69,9 @@ function Board() {
   return (
     <div className="App">
         <h1>Board = {id}</h1>
-        <TypeColumn BoardID={id} NoteTypeID="B5195139-2F1B-44E5-AF3C-089A74766D03" Notes={getNotesByType("B5195139-2F1B-44E5-AF3C-089A74766D03")} Connection={connection} Color="green" Name="Positive" />
-        <TypeColumn BoardID={id} NoteTypeID="98DCAE83-D031-4DEF-968A-1495E315FE4C" Notes={getNotesByType("98DCAE83-D031-4DEF-968A-1495E315FE4C")} Connection={connection} Color="red" Name="Negative" />
-        <TypeColumn BoardID={id} NoteTypeID="8CE5B5D7-1502-40A4-A7C8-48CBAF03D005" Notes={getNotesByType("8CE5B5D7-1502-40A4-A7C8-48CBAF03D005")} Connection={connection} Color="yellow" Name="Action" />
+        <TypeColumn ShowTexts={showTexts} BoardID={id} NoteTypeID="B5195139-2F1B-44E5-AF3C-089A74766D03" Notes={getNotesByType("B5195139-2F1B-44E5-AF3C-089A74766D03")} Connection={connection} Color="green" Name="Positive" />
+        <TypeColumn ShowTexts={showTexts} BoardID={id} NoteTypeID="98DCAE83-D031-4DEF-968A-1495E315FE4C" Notes={getNotesByType("98DCAE83-D031-4DEF-968A-1495E315FE4C")} Connection={connection} Color="red" Name="Negative" />
+        <TypeColumn ShowTexts={showTexts} BoardID={id} NoteTypeID="8CE5B5D7-1502-40A4-A7C8-48CBAF03D005" Notes={getNotesByType("8CE5B5D7-1502-40A4-A7C8-48CBAF03D005")} Connection={connection} Color="yellow" Name="Action" />
     </div>
   );
 }

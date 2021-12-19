@@ -49,6 +49,11 @@ body {
   padding: 10px;
 }
 
+.note-text.blur {
+  color: transparent !important;
+  text-shadow: 0 0 5px rgba(0,0,0,0.75);
+}
+
 .note-text.green {
   background: #7bfc03;
 }

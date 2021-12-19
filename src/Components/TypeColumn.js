@@ -7,6 +7,7 @@ class TypeColumn extends React.Component {
         super(props);
         this.addNewNote = this.addNewNote.bind(this);
         this.changeNewNoteText = this.changeNewNoteText.bind(this);
+        this.hideText = this.hideText.bind(this);
         this.state = {
             hubConnection: null,
             newNoteText: ''
@@ -25,13 +26,24 @@ class TypeColumn extends React.Component {
         this.setState({newNoteText: event.target.value});
     }
 
+    hideText(text) {
+        var result = "";
+
+        for (var i = 0;  i < text.length; i++) {
+            result += "-";
+        }
+
+        return result;
+    }
+
     render() {
         var notes = '';
 
         if(this.props.Notes != null && this.props.Notes.length > 0) {
-            const className = 'note-text ' + this.props.Color;
-            notes = this.props.Notes.map(function(item, i) {
-                return <span className={className} key={i}>{item.text}</span>
+            const showTexts = this.props.ShowTexts;
+            const className = 'note-text ' + this.props.Color + (showTexts ? '' : ' blur');
+            notes = this.props.Notes.map((item, i) => {
+                return <span className={className} key={i}>{showTexts ? item.text : this.hideText(item.text)}</span>
             });
         }
 
