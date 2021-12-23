@@ -16,6 +16,7 @@ function App() {
   return (
     <Router>
         <Routes>
+          <Route exact path="/" element={<Board />} />
           <Route exact path="/board/:id" element={<Board/>}/>
         </Routes>
     </Router>

@@ -11,7 +11,8 @@ function Board() {
   const [getNotes, setGetNotes] = useState(true);
   const [showTexts, setShowTexts] = useState(false);
   const latestColumn = useRef(null);
-  let { id } = useParams();
+  const apiUrl = 'https://basicretro.berkaybilgen.com';
+  let id = '34A16C68-B838-45A5-B250-74DBEF242EEC';
 
   latestColumn.current = notes;
 
@@ -22,7 +23,7 @@ function Board() {
     }
 
     const newConnection = new HubConnectionBuilder()
-                              .withUrl('https://localhost:44313/hubs/note')
+                              .withUrl(apiUrl + '/hubs/note')
                               .withAutomaticReconnect()
                               .build();
 
@@ -38,7 +39,7 @@ function Board() {
          setNotes(updatedColumn);
         });
       } else {
-        connection.start()
+        connection.start({ withCredentials: false })
         .then(result => {
           console.log("Connected");
 
@@ -53,7 +54,7 @@ function Board() {
   }, [connection]);
 
   function getCurrentNotes() {
-    fetch('https://localhost:44313/Board/notes?boardID=' + id)
+    fetch(apiUrl + '/Board/notes?boardID=' + id)
       .then(result => result.json())
       .then(result => {
         setNotes(result);
@@ -66,9 +67,14 @@ function Board() {
     })
   }
 
+  function flip() {
+    setShowTexts(!showTexts);
+  }
+
   return (
     <div className="App">
         <h1>Board = {id}</h1>
+        <button onClick={flip} className='flip'>Flip Texts</button>
         <TypeColumn ShowTexts={showTexts} BoardID={id} NoteTypeID="B5195139-2F1B-44E5-AF3C-089A74766D03" Notes={getNotesByType("B5195139-2F1B-44E5-AF3C-089A74766D03")} Connection={connection} Color="green" Name="Positive" />
         <TypeColumn ShowTexts={showTexts} BoardID={id} NoteTypeID="98DCAE83-D031-4DEF-968A-1495E315FE4C" Notes={getNotesByType("98DCAE83-D031-4DEF-968A-1495E315FE4C")} Connection={connection} Color="red" Name="Negative" />
         <TypeColumn ShowTexts={showTexts} BoardID={id} NoteTypeID="8CE5B5D7-1502-40A4-A7C8-48CBAF03D005" Notes={getNotesByType("8CE5B5D7-1502-40A4-A7C8-48CBAF03D005")} Connection={connection} Color="yellow" Name="Action" />
