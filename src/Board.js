@@ -17,6 +17,18 @@ function Board() {
   latestColumn.current = notes;
 
   useEffect(() => {
+    const jquery = document.createElement("script");
+    jquery.src = "https://code.jquery.com/jquery-1.10.2.min.js";
+    jquery.async = true;
+    document.body.appendChild(jquery);
+
+    /*
+    const bootstrap = document.createElement("script");
+    bootstrap.src = "https://cdn.jsdelivr.net/npm/bootstrap@4.1.1/dist/js/bootstrap.bundle.min.js";
+    bootstrap.async = true;
+    document.body.appendChild(bootstrap);
+    */
+
     if(getNotes) {
       getCurrentNotes();
       setGetNotes(false);
@@ -72,13 +84,17 @@ function Board() {
   }
 
   return (
-    <div className="App">
-        <h1>Board = {id}</h1>
-        <button onClick={flip} className='flip'>Flip Texts</button>
-        <TypeColumn ShowTexts={showTexts} BoardID={id} NoteTypeID="B5195139-2F1B-44E5-AF3C-089A74766D03" Notes={getNotesByType("B5195139-2F1B-44E5-AF3C-089A74766D03")} Connection={connection} Color="green" Name="Positive" />
-        <TypeColumn ShowTexts={showTexts} BoardID={id} NoteTypeID="98DCAE83-D031-4DEF-968A-1495E315FE4C" Notes={getNotesByType("98DCAE83-D031-4DEF-968A-1495E315FE4C")} Connection={connection} Color="red" Name="Negative" />
-        <TypeColumn ShowTexts={showTexts} BoardID={id} NoteTypeID="8CE5B5D7-1502-40A4-A7C8-48CBAF03D005" Notes={getNotesByType("8CE5B5D7-1502-40A4-A7C8-48CBAF03D005")} Connection={connection} Color="yellow" Name="Action" />
-    </div>
+    <main className="content">
+      <div className="container p-0">
+        <div className="row">
+          <h1>Board = {id}</h1>
+          <button onClick={flip} className='flip'>Flip Texts</button>
+          <TypeColumn key="1" ShowTexts={showTexts} BoardID={id} NoteTypeID="B5195139-2F1B-44E5-AF3C-089A74766D03" Notes={getNotesByType("B5195139-2F1B-44E5-AF3C-089A74766D03")} Connection={connection} Color="green" Name="Positive" />
+          <TypeColumn key="2" ShowTexts={showTexts} BoardID={id} NoteTypeID="98DCAE83-D031-4DEF-968A-1495E315FE4C" Notes={getNotesByType("98DCAE83-D031-4DEF-968A-1495E315FE4C")} Connection={connection} Color="red" Name="Negative" />
+          <TypeColumn key="3" ShowTexts={showTexts} BoardID={id} NoteTypeID="8CE5B5D7-1502-40A4-A7C8-48CBAF03D005" Notes={getNotesByType("8CE5B5D7-1502-40A4-A7C8-48CBAF03D005")} Connection={connection} Color="yellow" Name="Action" />
+        </div>
+      </div>
+    </main>
   );
 }
 

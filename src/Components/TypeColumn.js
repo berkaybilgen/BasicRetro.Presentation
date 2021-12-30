@@ -41,17 +41,31 @@ class TypeColumn extends React.Component {
 
         if(this.props.Notes != null && this.props.Notes.length > 0) {
             const showTexts = this.props.ShowTexts;
-            const className = 'note-text ' + this.props.Color + (showTexts ? '' : ' blur');
+            const className = (showTexts ? '' : ' blur');
             notes = this.props.Notes.map((item, i) => {
-                return <span className={className} key={i}>{showTexts ? item.text : this.hideText(item.text)}</span>
+                return <div key={i} className="card mb-3 bg-light">
+                            <div className="card-body p-3">
+                                <p className={className}>{showTexts ? item.text : this.hideText(item.text)}</p>
+                                <div className="float-right mt-n1">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar6.png" width="32" height="32" className="rounded-circle" alt="Avatar"/>
+                                </div>
+                            </div>
+                        </div>
             });
         }
 
-        return <div className="type-column">
-                    <h1>{this.props.Name}</h1>
-                    <input onChange={this.changeNewNoteText} type="text" />
-                    <button onClick={this.addNewNote}>Add New Note</button>
-                    {notes}
+        return <div className="col-12 col-lg-6 col-xl-4">
+                    <div className="card card-border-primary">
+                        <div className="card-header">
+                            <h5 className="card-title">{this.props.Name}</h5>
+                            <h6 className="card-subtitle text-muted">Nam pretium turpis et arcu. Duis arcu tortor.</h6>
+                        </div>
+                        <div className="card-body p-3">
+                        <input placeholder='New comment' onChange={this.changeNewNoteText} type="text" />
+                            <button className="btn btn-primary btn-block" onClick={this.addNewNote}>Add New Note</button>
+                            {notes}
+                        </div>
+                    </div>
                 </div>
     }
 }
