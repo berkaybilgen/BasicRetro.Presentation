@@ -46,9 +46,6 @@ class TypeColumn extends React.Component {
                 return <div key={i} className="card mb-3 bg-light">
                             <div className="card-body p-3">
                                 <p className={className}>{showTexts ? item.text : this.hideText(item.text)}</p>
-                                <div className="float-right mt-n1">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar6.png" width="32" height="32" className="rounded-circle" alt="Avatar"/>
-                                </div>
                             </div>
                         </div>
             });
