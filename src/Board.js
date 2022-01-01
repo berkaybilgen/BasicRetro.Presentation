@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 function Board() {
   const [connection, setConnection] = useState(null);
   const [notes, setNotes] = useState([]);
+  const [board, setBoard] = useState({ id: 0, name: "" });
   const [getNotes, setGetNotes] = useState(true);
   const [showTexts, setShowTexts] = useState(false);
   const latestColumn = useRef(null);
@@ -30,6 +31,7 @@ function Board() {
     */
 
     if(getNotes) {
+      getBoardInfo();
       getCurrentNotes();
       setGetNotes(false);
     }
@@ -73,6 +75,14 @@ function Board() {
       })
   }
 
+  function getBoardInfo() {
+    fetch(apiUrl + '/Board?boardID=' + id)
+      .then(result => result.json())
+      .then(result => {
+        setBoard(result);
+      })
+  }
+
   function getNotesByType(noteTypeID) {
     return notes.filter((note) => {
         return note.noteTypeID == noteTypeID.toLowerCase()
@@ -87,8 +97,10 @@ function Board() {
     <main className="content">
       <div className="container p-0">
         <div className="row">
-          <h1>Board = {id}</h1>
-          <button onClick={flip} className='flip'>Flip Texts</button>
+          <div className="board-info">
+            <h1>Board = {board.name}</h1>
+            <button onClick={flip} className='flip'>Flip Texts</button>
+          </div>
           <TypeColumn key="1" ShowTexts={showTexts} BoardID={id} NoteTypeID="B5195139-2F1B-44E5-AF3C-089A74766D03" Notes={getNotesByType("B5195139-2F1B-44E5-AF3C-089A74766D03")} Connection={connection} Color="green" Name="Positive" />
           <TypeColumn key="2" ShowTexts={showTexts} BoardID={id} NoteTypeID="98DCAE83-D031-4DEF-968A-1495E315FE4C" Notes={getNotesByType("98DCAE83-D031-4DEF-968A-1495E315FE4C")} Connection={connection} Color="red" Name="Negative" />
           <TypeColumn key="3" ShowTexts={showTexts} BoardID={id} NoteTypeID="8CE5B5D7-1502-40A4-A7C8-48CBAF03D005" Notes={getNotesByType("8CE5B5D7-1502-40A4-A7C8-48CBAF03D005")} Connection={connection} Color="yellow" Name="Action" />

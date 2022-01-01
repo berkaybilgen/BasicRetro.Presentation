@@ -227,3 +227,7 @@ input[type='text'] {
   border: 2px solid #e3e3e3;
   padding: 5px 10px;
 }
+
+.board-info {
+  width: 100%;
+}
